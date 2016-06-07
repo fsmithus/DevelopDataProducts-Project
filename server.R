@@ -5,12 +5,13 @@ library(mapproj)
 library(maptools)
 
 # Define function that draws the choropleth maps.
-drawMaps <- function(states,pop,delta) {
-        # Note: states is not used, but just passed in for debugging purposes.
+drawGraphics <- function(states,pop,delta) {
         
         # Note: Since all of the input data for this application is read-only (a mapping from a value to a color),
         # most of this function could be performed one time, during server initialization, to improve interactive
         # performance. But since performance does not seem to be an issue, I did not bother to optimize the code.
+        # As is, the source data is scrubbed into a master data frame (i.e., census.data), and the colors are
+        # recomputed with each interaction of the slider.
         
         # Initialize plot region.
         par(mfrow=c(2,1))
@@ -21,17 +22,18 @@ drawMaps <- function(states,pop,delta) {
         
         map.data <- data.frame(state=states,
                                value=pop,
-                               colorIndex=integer(length(pop)),
+                               colorIndex=integer(length(pop)), # saved for debugging purposes
                                color=character(length(pop)),
                                stringsAsFactors=FALSE)
-        colors <- colorRampPalette(c("white","darkblue"))(nc)
-        slope <- nc / max(map.data$value)
-        for (i in 1:length(map.data$value)) {
+        colors <- colorRampPalette(c("white","darkblue"))(nc)   # single linear palette of colors
+        slope <- nc / max(map.data$value)                       # colors per population
+        for (i in 1:length(map.data$value)) {                   # Calculate the color for each population value
                 map.data$colorIndex[i] <- round(map.data$value[i] * slope)
                 if (map.data$colorIndex[i] == 0) map.data$colorIndex[i] <- 1
                 map.data$color[i] <- colors[map.data$colorIndex[i]]
         }
         
+        # Draw the map using the maps package. match.map() matches map polygons to data records by state name.
         map("state",regions=census.data$state,exact=FALSE,proj="polyconic",fill=TRUE,
             col=map.data$color[match.map("state",regions=census.data$state,exact=FALSE,warn=TRUE)])
         
@@ -40,15 +42,15 @@ drawMaps <- function(states,pop,delta) {
         nc <- 50        # One half the number of colors.
         map.data <- data.frame(states,
                                value=delta,
-                               colorIndex=integer(length(delta)),
+                               colorIndex=integer(length(delta)),       # saved for debugging purposes
                                color=character(length(delta)),
                                stringsAsFactors=FALSE)
-        inc.colors <- colorRampPalette(c("white","darkgreen"))(nc)
-        inc.slope = abs(nc / max(map.data$value))
+        inc.colors <- colorRampPalette(c("white","darkgreen"))(nc)      # two-sided linear palette for decrease/increase
+        inc.slope = abs(nc / max(map.data$value))                       # colors per increasing population
         dec.colors <- colorRampPalette(c("white","darkred"))(nc)
-        dec.slope = abs(nc / min(map.data$value))
+        dec.slope = abs(nc / min(map.data$value))                       # colors per decreasing population
         
-        for (i in 1:length(map.data$value)) {
+        for (i in 1:length(map.data$value)) {                           # Calculate the color for each population value
                 if (map.data$value[i] < 0) {
                         map.data$colorIndex[i] <- round(abs(map.data$value[i] * dec.slope))
                         if (map.data$colorIndex[i] == 0) map.data$colorIndex[i] <- 1
@@ -61,6 +63,7 @@ drawMaps <- function(states,pop,delta) {
                 }
         }
         
+        # Draw the map using the maps package. match.map() matches map polygons to data records by state name.
         map("state",regions=census.data$state,exact=FALSE,proj="polyconic",fill=TRUE,
             col=map.data$color[match.map("state",regions=census.data$state,exact=FALSE,warn=TRUE)])
 }
@@ -105,9 +108,9 @@ shinyServer(
                 
                 output$map <- renderPlot({
                         # Run when a widget value is changed.
-                        drawMaps(census.data$state,
-                                 census.data[,paste0("pop",toString(input$year))],
-                                 census.data[,paste0("delta",toString(input$year))])
+                        drawGraphics(census.data$state,
+                                     census.data[,paste0("pop",toString(input$year))],
+                                     census.data[,paste0("delta",toString(input$year))])
                 }, height=800, width=1200)
         }       
 )
