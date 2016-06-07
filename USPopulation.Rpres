@@ -1,0 +1,82 @@
+United States Population Study
+========================================================
+author: Fred Smith
+date: `r date()`
+
+
+This presentation describes my submission for the final project of the "Developing Data Products" course of the Data Science Specialization offered by Coursera.
+
+
+Project Objectives
+========================================================
+
+Learn presentation and publication tools for data science.
+
+- Shiny interactive web applications
+- R Studio Presentor or Slidify for R-enabled presentations
+- Github to manage and distribute source and compiled files
+- Project analysis and subject were left to the student, but required non-trivial and dynamic content
+
+
+Population Study
+========================================================
+
+I chose to analyze census data and visually answer such questions as:
+
+- Which states have the largest and smallest populations?
+- Over the last 5 years, which state populations have had the largest increases and decreases?
+
+Otherwise, my goal was to keep the application as simple as possible.
+
+- No numbers, only graphics (colored maps)
+- No legends, as they are not required to answer the questions
+
+
+Census Data
+========================================================
+
+United States Census Bureau
+
+- Start here - http://www.census.gov/popest/data/national/totals/2015/
+- NST-EST2015-alldata dataset was used
+- PDF describes the schema
+- CSV contains the data
+- Only the annual population columns were used for this study
+
+
+Shiny Application
+========================================================
+
+
+Uses maps package draws choropleth maps.
+
+- Drawn in R
+- Colored by population
+- Darker colors for higher populations
+- Relative populations are obvious
+
+***
+
+```{r echo=FALSE,figs.only=TRUE}
+library(maps)
+library(mapproj)
+library(maptools)
+
+census.data <- read.csv("../master/NST-EST2015-alldata.csv")
+census.data <- census.data[census.data$SUMLEV==40,]             # Remove non-state summaries
+
+palette <- colorRampPalette(c("white","darkblue"))(50)          # single linear palette of colors
+slope <- length(palette) / max(census.data$CENSUS2010POP)       # colors per population
+n <- length(census.data$CENSUS2010POP)
+color <- rep(character(),n)
+for (i in 1:n) {                                                # Calculate the color for each population value
+        index <- round(census.data$CENSUS2010POP[i] * slope)
+        if (index == 0) index <- 1
+        color[i] <- palette[index]
+        }
+
+# Draw the map using the maps package. match.map() matches map polygons to data records by state name.
+states <- tolower(census.data$NAME)
+map("state",regions=states,exact=FALSE,proj="polyconic",fill=TRUE,
+    col=color[match.map("state",regions=states,exact=FALSE,warn=TRUE)])
+```
