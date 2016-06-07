@@ -1,7 +1,7 @@
 United States Population Study
 ========================================================
 author: Fred Smith
-date: Tue Jun 07 17:47:58 2016
+date: Tue Jun 07 17:50:25 2016
 
 
 This presentation describes my submission for the final project of the "Developing Data Products" course of the Data Science Specialization offered by Coursera.
