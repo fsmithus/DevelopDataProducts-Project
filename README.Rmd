@@ -1,0 +1,37 @@
+---
+title: "United States Relative Populations and Changes"
+author: "Fred Smith"
+date: "Tuesday, June 07, 2016"
+output: html_document
+---
+
+# Background
+
+This site is my submission for the final project of the "Developing Data Products" course of the Data Science
+Specialization in Coursera.
+
+The primary goal was to learn interactive presentation tools such as Shiny, Slidify, and R Studio Presenter. These
+tools are integrated with RStudio and commonly used by data scientists to publish their work.
+
+The exercise was two-fold:
+        * Publish an interactive Shiny application and publish it to the shinyapps.io web site. The content for the exercise was left to the student, but the application had to have at least one input widget, some dynamic output rendered via R, and enough documentation that a novice user could use the application.
+        * Publish a presentation documenting the application and its findings.
+        
+Additionally, all project files are managed in github.com and published to public web sites (i.e., shinyapps.io and github.com)
+
+
+# Environment
+
+The following environment was used to develop the web sites.
+
+```{r results='hide',warning=FALSE,message=FALSE}
+library(maps)
+library(mapproj)
+library(maptools)
+library(shiny)
+library(shinyapps)
+```
+
+```{r}
+sessionInfo()
+```
