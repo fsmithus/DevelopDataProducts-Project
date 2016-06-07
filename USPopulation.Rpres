@@ -48,12 +48,12 @@ Shiny Application
 ========================================================
 
 
-Uses maps package draws choropleth maps.
+Uses maps package to draw choropleth maps.
 
 - Drawn in R
 - Colored by population
 - Darker colors for higher populations
-- Relative populations are obvious
+- Relative populations are visually obvious
 
 ***
 

@@ -1,7 +1,7 @@
 United States Population Study
 ========================================================
 author: Fred Smith
-date: Tue Jun 07 16:31:37 2016
+date: Tue Jun 07 16:34:29 2016
 
 
 This presentation describes my submission for the final project of the "Developing Data Products" course of the Data Science Specialization offered by Coursera.
@@ -48,12 +48,12 @@ Shiny Application
 ========================================================
 
 
-Uses maps package draws choropleth maps.
+Uses maps package to draw choropleth maps.
 
 - Drawn in R
 - Colored by population
 - Darker colors for higher populations
-- Relative populations are obvious
+- Relative populations are visually obvious
 
 ***
 
