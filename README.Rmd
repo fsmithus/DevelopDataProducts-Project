@@ -22,6 +22,26 @@ The exercise was two-fold:
 Additionally, all project files are managed in github.com and published to public web sites (i.e., shinyapps.io and github.com)
 
 
+# Structure
+
+This project has two branches in Github. The current "gh-pages" branch contains the HTML files that were written by
+hand and using RStudio (presentation) and are automatically published to the github.io hosting pages. The "master" branch contains the Shiny app files that were deployed to the Shiny server at shinyapps.io.
+
+Consequently, there are several web pages that are all linked from the main github.io pages:
+
+* http://fsmithus.github.io/DevelopDataProducts-Project/index.html - Index to project web sites.
+
+* http://fsmithus.github.io/DevelopDataProducts-Project/USPopulation.html - Slide presentation describing the Shiny application.
+
+* https://fsmith.shinyapps.io/master/ - Link to Shiny application running dynamic pupulation study maps. The application may take a couple minutes to startup on the first visit.
+
+* http://fsmithus.github.io/DevelopDataProducts-Project/README.html - This file, created as Rmd. Includes this information and the version information required to make this study reproduceable.
+
+* https://github.com/fsmithus/DevelopDataProducts-Project/tree/master - The project master branch which contains the code for the Shiny application (i.e., ui.R and server.R).
+
+* https://github.com/fsmithus/DevelopDataProducts-Project/tree/gh-pages - The project gh-pages branch which contains the static (compiled) project pages.
+
+
 # Environment
 
 The following packages were used to develop the web sites.
