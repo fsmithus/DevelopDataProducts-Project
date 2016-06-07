@@ -22,7 +22,7 @@ Additionally, all project files are managed in github.com and published to publi
 
 # Environment
 
-The following environment was used to develop the web sites.
+The following packages were used to develop the web sites.
 
 ```{r message=FALSE}
 library(maps)
@@ -31,6 +31,8 @@ library(maptools)
 library(shiny)
 library(shinyapps)
 ```
+
+Versions were as shown below.
 
 ```{r}
 sessionInfo()
