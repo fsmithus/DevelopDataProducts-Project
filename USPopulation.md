@@ -1,7 +1,7 @@
 United States Population Study
 ========================================================
 author: Fred Smith
-date: Tue Jun 07 16:34:29 2016
+date: Tue Jun 07 16:37:27 2016
 
 
 This presentation describes my submission for the final project of the "Developing Data Products" course of the Data Science Specialization offered by Coursera.
@@ -44,7 +44,7 @@ United States Census Bureau
 - Only the annual population columns were used for this study
 
 
-Shiny Application
+Shiny Application (https://fsmith.shinyapps.io/master/)
 ========================================================
 
 
