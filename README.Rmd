@@ -24,7 +24,7 @@ Additionally, all project files are managed in github.com and published to publi
 
 The following environment was used to develop the web sites.
 
-```{r results='hide',warning=FALSE,message=FALSE}
+```{r message=FALSE}
 library(maps)
 library(mapproj)
 library(maptools)
