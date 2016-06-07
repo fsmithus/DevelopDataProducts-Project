@@ -1,7 +1,7 @@
 United States Population Study
 ========================================================
 author: Fred Smith
-date: Tue Jun 07 16:45:20 2016
+date: Tue Jun 07 17:38:50 2016
 
 
 This presentation describes my submission for the final project of the "Developing Data Products" course of the Data Science Specialization offered by Coursera.
@@ -54,6 +54,8 @@ Uses maps package to draw [dynamic choropleth maps](https://fsmith.shinyapps.io/
 - Colored by population
 - Darker colors for higher populations
 - Relative populations are visually obvious
+
+[Project Index](http://fsmithus.github.io/DevelopDataProducts-Project/index.html)
 
 ***
 

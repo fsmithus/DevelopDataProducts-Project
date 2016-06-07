@@ -55,6 +55,8 @@ Uses maps package to draw [dynamic choropleth maps](https://fsmith.shinyapps.io/
 - Darker colors for higher populations
 - Relative populations are visually obvious
 
+[Project Index](http://fsmithus.github.io/DevelopDataProducts-Project/index.html)
+
 ***
 
 ```{r echo=FALSE,figs.only=TRUE}
