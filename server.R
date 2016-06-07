@@ -17,7 +17,7 @@ drawMaps <- function(states,pop,delta) {
         par(mar=c(0,0,0,0))
         
         # White/blue palette for actual population.
-        nc <- 50
+        nc <- 100
         
         map.data <- data.frame(state=states,
                                value=pop,
@@ -32,7 +32,8 @@ drawMaps <- function(states,pop,delta) {
                 map.data$color[i] <- colors[map.data$colorIndex[i]]
         }
         
-        map("state",proj="polyconic",fill=TRUE,col=map.data$color)
+        map("state",regions=census.data$state,exact=FALSE,proj="polyconic",fill=TRUE,
+            col=map.data$color[match.map("state",regions=census.data$state,exact=FALSE,warn=TRUE)])
         
         
         # Red/white/green palette for changes in population.
@@ -42,7 +43,7 @@ drawMaps <- function(states,pop,delta) {
                                colorIndex=integer(length(delta)),
                                color=character(length(delta)),
                                stringsAsFactors=FALSE)
-        inc.colors <- colorRampPalette(c("darkgreen","white"))(nc)
+        inc.colors <- colorRampPalette(c("white","darkgreen"))(nc)
         inc.slope = abs(nc / max(map.data$value))
         dec.colors <- colorRampPalette(c("white","darkred"))(nc)
         dec.slope = abs(nc / min(map.data$value))
@@ -60,7 +61,8 @@ drawMaps <- function(states,pop,delta) {
                 }
         }
         
-        map("state",proj="polyconic",fill=TRUE,col=map.data$color)
+        map("state",regions=census.data$state,exact=FALSE,proj="polyconic",fill=TRUE,
+            col=map.data$color[match.map("state",regions=census.data$state,exact=FALSE,warn=TRUE)])
 }
 
 
